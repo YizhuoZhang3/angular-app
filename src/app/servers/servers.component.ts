@@ -9,27 +9,34 @@ import { Component, OnInit } from '@angular/core';
 export class ServersComponent implements OnInit {
 
   allowNewServer = false;
-  serverCreationStatus = 'No server was created!';
+  serverCreationStatus: string = 'offline';
   servername = 'TestServer';
   username = '';
   empty = true;
+  serverCreated = false;
 
+  servers = ['testServer1', 'testServer2']
   constructor() { 
-    setTimeout(()=>{this.allowNewServer=true}, 2000)
+    setTimeout(()=>{this.allowNewServer=true}, 2000);
+
+    this.serverCreationStatus = Math.random() > 0.5 ? 'online' : 'offline';
+
   }
   ngOnInit(): void {
   }
 
   onCreateServer() {
-    this.serverCreationStatus = 'Server was created! Name is '+this.servername;
+    this.serverCreated = true;
+    this.serverCreationStatus = 'Server was created! Name is '+ this.servername;
+    this.servers.push(this.servername)
   }
 
   onUpdateServerName(event: any){
     this.servername = (<HTMLInputElement>event.target).value;
   }
 
-  onClearUserName(){
-    this.username = "";
+  getColor(){
+    return this.serverCreationStatus === 'online' ? 'green' : 'red';
   }
 
 }

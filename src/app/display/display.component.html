@@ -1,0 +1,10 @@
+<!-- <button
+  class="btn btn-primary"
+  (click)="showSecrete = !showSecrete"
+>Display Details</button> -->
+<button
+  class="btn btn-primary"
+  (click)="onToggleDetails()"
+>Display Details</button>
+<p *ngIf="showSecrete">Secret Password = tuna</p>
+<div *ngFor="let item of log">{{ item }}</div>
